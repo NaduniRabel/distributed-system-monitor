@@ -1,6 +1,8 @@
 package collector
 
 import (
+	"fmt"
+
 	"time"
 
 	"github.com/shirou/gopsutil/v4/cpu"
@@ -10,36 +12,12 @@ import (
 	"github.com/shirou/gopsutil/v4/disk"
 )
 
-func CollectMetrics() (SystemMetrics, error) {
-	/*Calling methods to get CPU, memory and disk data*/
-	cpuMetrics, err := getCPUMetrics()
-	if err != nil {
-		return SystemMetrics{}, err
-	}
-
-	memMetrics, err := getMemoryMetrics()
-	if err != nil {
-		return SystemMetrics{}, err
-	}
-
-	diskMetrics, err := getDiskMetrics()
-	if err != nil {
-		return SystemMetrics{}, err
-	}
-
-	return SystemMetrics{
-		CPU:    cpuMetrics,
-		Memory: memMetrics,
-		Disk:   diskMetrics,
-	}, nil
-
-}
-
 /*Structs*/
 type SystemMetrics struct {
-	CPU    CPUMetrics
-	Memory MemMetrics
-	Disk   DiskMetrics
+	CPU      CPUMetrics
+	Memory   MemMetrics
+	Disk     DiskMetrics
+	Services []ServiceMetrics
 }
 type CPUMetrics struct {
 	Usage []float64
@@ -103,4 +81,35 @@ func getDiskMetrics() (DiskMetrics, error) {
 		Used:  info.Used,
 		Free:  info.Free,
 	}, nil
+}
+
+func CollectMetrics() (SystemMetrics, error) {
+	/*Calling methods to get CPU, memory and disk data*/
+	cpuMetrics, err := getCPUMetrics()
+	if err != nil {
+		return SystemMetrics{}, err
+	}
+
+	memMetrics, err := getMemoryMetrics()
+	if err != nil {
+		return SystemMetrics{}, err
+	}
+
+	diskMetrics, err := getDiskMetrics()
+	if err != nil {
+		return SystemMetrics{}, err
+	}
+
+	serviceMetrics, err := GetServiceMetrics()
+	if err != nil {
+		fmt.Print("Error extracting service level information")
+	}
+
+	return SystemMetrics{
+		CPU:      cpuMetrics,
+		Memory:   memMetrics,
+		Disk:     diskMetrics,
+		Services: serviceMetrics,
+	}, nil
+
 }
