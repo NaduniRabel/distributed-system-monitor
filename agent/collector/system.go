@@ -10,15 +10,23 @@ import (
 	"github.com/shirou/gopsutil/v4/mem"
 
 	"github.com/shirou/gopsutil/v4/disk"
+
+	"github.com/shirou/gopsutil/v4/host"
 )
 
 /*Structs*/
 type SystemMetrics struct {
+	Host     HostMetrics
 	CPU      CPUMetrics
 	Memory   MemMetrics
 	Disk     DiskMetrics
 	Services []ServiceMetrics
 }
+
+type HostMetrics struct {
+	HostID string
+}
+
 type CPUMetrics struct {
 	Usage []float64
 }
@@ -34,6 +42,19 @@ type DiskMetrics struct {
 	Total uint64
 	Used  uint64
 	Free  uint64
+}
+
+func getHostMetrics() (HostMetrics, error) {
+
+	id, err := host.HostID()
+
+	if err != nil {
+		return HostMetrics{}, err
+	}
+
+	return HostMetrics{
+		HostID: id,
+	}, nil
 }
 
 func getCPUMetrics() (CPUMetrics, error) {
@@ -85,6 +106,11 @@ func getDiskMetrics() (DiskMetrics, error) {
 
 func CollectMetrics() (SystemMetrics, error) {
 	/*Calling methods to get CPU, memory and disk data*/
+	hostMetrics, err := getHostMetrics()
+	if err != nil {
+		return SystemMetrics{}, err
+	}
+
 	cpuMetrics, err := getCPUMetrics()
 	if err != nil {
 		return SystemMetrics{}, err
@@ -106,6 +132,7 @@ func CollectMetrics() (SystemMetrics, error) {
 	}
 
 	return SystemMetrics{
+		Host:     hostMetrics,
 		CPU:      cpuMetrics,
 		Memory:   memMetrics,
 		Disk:     diskMetrics,
