@@ -9,7 +9,7 @@ A REST API is provided to view server details.
 -PostgreSQL installed and running.
 -Git to clone the repository.
 
-<h2>Database Setup</h2>h2>
+<h2>Database Setup</h2>
 Before starting the services, ensure your PostgreSQL instance is running.
 Create a database named with a preferred name. 
 
