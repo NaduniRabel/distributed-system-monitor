@@ -4,12 +4,16 @@ import (
 	"log"
 	"net"
 
+	db "github.com/NaduniRabel/distributed-system-monitor/HQ/db"
 	grpcServer "github.com/NaduniRabel/distributed-system-monitor/HQ/grpcServer/server"
 	pb "github.com/NaduniRabel/distributed-system-monitor/proto"
 	"google.golang.org/grpc"
 )
 
 func main() {
+
+	db.Init()
+
 	/*Listen on port 9001*/
 	lis, err := net.Listen("tcp", ":9001")
 
