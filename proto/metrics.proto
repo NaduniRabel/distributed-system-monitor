@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package metrics;
+
+option go_package = "github.com/NaduniRabel/distributed-system-monitor/proto;proto";
+
+/*Service*/
+service MetricService{
+    rpc StreamMetrics(stream Metrics) returns (Response){}
+}
+
+/*Metrics*/
+
+message HostMetrics { 
+
+    string HostID = 1;
+}
+
+message CPUMetrics {
+
+    repeated double Usage = 1;
+}
+
+message MemMetrics{
+
+    uint64 Total = 1;       
+	uint64 Free = 2;        
+	double UsedPercentage = 3;
+	uint64 Available = 4;     
+}
+
+message DiskMetrics {
+
+	uint64 Total = 1;
+	uint64 Used = 2;
+	uint64 Free = 3;
+}
+
+message ServiceMetrics{
+    string Name = 1;
+	string Status = 2;
+	double CPU  = 3; 
+	float Memory = 4;
+}
+
+message Metrics{
+
+    HostMetrics Host = 1;
+    CPUMetrics CPU = 2;   
+	MemMetrics Memory = 3; 
+	DiskMetrics Disk = 4;   
+	repeated ServiceMetrics Services = 5;
+
+}
+
+message Response{
+
+    bool success = 1;
+    string message = 2;
+}
