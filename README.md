@@ -6,6 +6,7 @@ A REST API is provided to view server details.
 <h2>Prerequisites</h2>
 
 -Go 1.21+ installed.
+-Protobuf installed
 -PostgreSQL installed and running.
 -Git to clone the repository.
 
@@ -15,7 +16,7 @@ Create a database named with a preferred name.
 
 ```bash
 // Format: postgres://<user>:<password>@localhost:5432/<database_name>?sslmode=disable
-databaseURL := "postgres://postgres:root@localhost:5432/postgres?sslmode=disable"
+databaseURL := "postgres://user:password@localhost:5432/postgres?sslmode=disable"
 ```
 
 <h2>Running the HQ (gRPC Server & REST API)</h2>
@@ -38,6 +39,10 @@ This server listens on port 8080 to serve server status data.
 cd HQ/restApi
 go mod tidy
 go run main.go
+```
+Access via:
+```bash
+http://localhost:8080
 ```
 
 <h2>Running the Agent</h2>
