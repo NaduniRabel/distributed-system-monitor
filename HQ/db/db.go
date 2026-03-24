@@ -11,7 +11,7 @@ var Pool *pgxpool.Pool
 
 func Init() {
 	/*Database details*/
-	databaseURL := "postgres://postgres:root@localhost:5432/postgres?sslmode=disable"
+	databaseURL := "postgres://user:password@localhost:5432/postgres?sslmode=disable"
 
 	ctx := context.Background()
 
