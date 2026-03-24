@@ -1,6 +1,7 @@
 package db
 
 import (
+	"os"
 	"context"
 	"log"
 
@@ -11,7 +12,7 @@ var Pool *pgxpool.Pool
 
 func Init() {
 	/*Database details*/
-	databaseURL := "postgres://user:password@localhost:5432/postgres?sslmode=disable"
+	databaseURL := os.Getenv("DATABASE_URL")
 
 	ctx := context.Background()
 
