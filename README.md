@@ -40,7 +40,7 @@ cd HQ/restApi
 go mod tidy
 go run main.go
 ```
-Access via:
+ Access via:
 ```bash
 http://localhost:8080
 ```
