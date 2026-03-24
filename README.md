@@ -12,7 +12,7 @@ A REST API is provided to view server details.
 
 <h2>Database Setup</h2>
 Before starting the services, ensure your PostgreSQL instance is running.
-Replace credentials in the .env
+Replace credentials in the .env. <br>
 Create a database named with a preferred name. 
 
 ```bash
