@@ -12,11 +12,12 @@ A REST API is provided to view server details.
 
 <h2>Database Setup</h2>
 Before starting the services, ensure your PostgreSQL instance is running.
+Replace credentials in the .env
 Create a database named with a preferred name. 
 
 ```bash
 // Format: postgres://<user>:<password>@localhost:5432/<database_name>?sslmode=disable
-databaseURL := "postgres://user:password@localhost:5432/postgres?sslmode=disable"
+DATABASE_URL=postgres://user:password@localhost:5432/postgres?sslmode=disable
 ```
 
 <h2>Running the HQ (gRPC Server & REST API)</h2>
