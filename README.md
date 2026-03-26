@@ -11,7 +11,7 @@ A REST API is provided to view server details.
 -Git to clone the repository.
 
 <h2>Database Setup</h2>
-Before starting the services, ensure your PostgreSQL instance is running.
+Before starting the services, ensure PostgreSQL is running.
 Replace credentials in the .env. <br>
 Create a database named with a preferred name. 
 
@@ -37,7 +37,7 @@ go run main.go
 This server listens on port 8080 to serve server status data.
 
 ```bash
-cd HQ/restApi
+cd HQ/REST
 go mod tidy
 go run main.go
 ```
