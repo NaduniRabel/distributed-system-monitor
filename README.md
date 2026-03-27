@@ -5,9 +5,9 @@ A REST API is provided to view server details.
 
 <h2>Prerequisites</h2>
 
--Go 1.21+ installed.
--Protobuf installed
--PostgreSQL installed and running.
+-Go 1.21+ installed.<br>
+-Protobuf installed<br>
+-PostgreSQL installed and running.<br>
 -Git to clone the repository.
 
 <h2>Database Setup</h2>
